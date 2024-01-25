@@ -1,0 +1,6 @@
+framework module Pods_SwiftProject_SportsApp {
+  umbrella header "Pods-SwiftProject_SportsApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
