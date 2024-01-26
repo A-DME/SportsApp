@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SportsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet weak var sportsCollection: UICollectionView!
     var twoCellsPerRow: Bool = true
@@ -57,6 +57,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     @IBAction func changeView(_ sender: Any) {
         twoCellsPerRow = !twoCellsPerRow
+//        self.navigationItem.rightBarButtonItem?.image = twoCellsPerRow ? .squaresIcon : .listIcon
         sportsCollection.collectionViewLayout.invalidateLayout()
 
     }

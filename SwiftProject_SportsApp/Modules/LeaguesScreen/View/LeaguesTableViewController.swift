@@ -53,6 +53,11 @@ class LeaguesTableViewController: UITableViewController {
         return 75
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let leagueDetails = self.storyboard?.instantiateViewController(withIdentifier: "leagueDetails") as! LeagueDetailsViewController
+        present(leagueDetails, animated: true)
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

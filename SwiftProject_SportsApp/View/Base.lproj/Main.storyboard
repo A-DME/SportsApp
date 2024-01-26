@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Sports View Controller-->
         <scene sceneID="cqQ-uE-1O6">
             <objects>
-                <viewController id="qRA-wq-TJt" customClass="ViewController" customModule="SwiftProject_SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="qRA-wq-TJt" customClass="SportsViewController" customModule="SwiftProject_SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cmd-Y7-6Mb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +28,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="pTt-ss-ybg" customClass="SportsCustomCollectionViewCell" customModule="SwiftProject_SportsApp" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="pTt-ss-ybg" customClass="SportsCustomCollectionViewCell" customModule="SwiftProject_SportsApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="93d-d7-UUE">
@@ -50,9 +50,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="qYR-pO-s4H">
                         <barButtonItem key="rightBarButtonItem" title="Item" id="4MP-0v-Psc">
-                            <imageReference key="image" image="square.split.2x2.fill" catalog="system" renderingMode="hierarchical">
+                            <imageReference key="image" image="list.bullet" catalog="system" renderingMode="hierarchical">
                                 <hierarchicalColors>
-                                    <color white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color systemColor="secondaryLabelColor"/>
                                     <color systemColor="tertiaryLabelColor"/>
                                 </hierarchicalColors>
@@ -78,7 +78,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="ww1-ow-irN">
+                        <navigationBar key="tableHeaderView" clipsSubviews="YES" contentMode="scaleToFill" id="ww1-ow-irN">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -122,39 +122,43 @@
             </objects>
             <point key="canvasLocation" x="1931" y="-406"/>
         </scene>
-        <!--Collection View Controller-->
-        <scene sceneID="7ID-eM-JGO">
+        <!--Team Details View Controller-->
+        <scene sceneID="ylC-2f-pGc">
             <objects>
-                <collectionViewController id="qnd-1A-Yun" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="VXU-ZL-IeA">
+                <viewController storyboardIdentifier="teamDetails" modalPresentationStyle="fullScreen" id="ug2-2l-G1z" customClass="TeamDetailsViewController" customModule="SwiftProject_SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cFQ-zd-PhL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIe-rY-idw">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="Title" id="rGS-3I-INr">
+                                        <barButtonItem key="leftBarButtonItem" id="3r5-wl-oL0">
+                                            <imageReference key="image" image="chevron.left" catalog="system" renderingMode="hierarchical">
+                                                <hierarchicalColors>
+                                                    <color white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color systemColor="secondaryLabelColor"/>
+                                                    <color systemColor="tertiaryLabelColor"/>
+                                                </hierarchicalColors>
+                                            </imageReference>
+                                            <connections>
+                                                <action selector="backButton:" destination="ug2-2l-G1z" id="EW4-Jw-mwI"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="w87-wJ-Qcl"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="j7U-RU-HZQ">
-                            <size key="itemSize" width="128" height="128"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vTZ-87-MLo">
-                                <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="92Z-K6-eMS">
-                                    <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </collectionViewCellContentView>
-                            </collectionViewCell>
-                        </cells>
-                        <connections>
-                            <outlet property="dataSource" destination="qnd-1A-Yun" id="EpT-4y-HWq"/>
-                            <outlet property="delegate" destination="qnd-1A-Yun" id="57r-EI-GY8"/>
-                        </connections>
-                    </collectionView>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i89-oS-0Ce" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z8Q-yF-JPl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2822" y="151"/>
+            <point key="canvasLocation" x="3830" y="151"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="dTM-oD-Yxs">
@@ -185,7 +189,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="rxf-iY-jBf">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="fcell" id="rxf-iY-jBf">
                                 <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rxf-iY-jBf" id="1Ra-2z-GPY">
@@ -204,6 +208,75 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5oI-V4-vmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1931" y="511"/>
+        </scene>
+        <!--League Details View Controller-->
+        <scene sceneID="Auk-DD-ebO">
+            <objects>
+                <viewController storyboardIdentifier="leagueDetails" modalPresentationStyle="fullScreen" id="9c2-fS-qkS" customClass="LeagueDetailsViewController" customModule="SwiftProject_SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ADo-fX-5ro">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pag-QM-01e">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="Title" id="L2f-Uk-LgO">
+                                        <barButtonItem key="leftBarButtonItem" id="cRs-fc-ejl">
+                                            <imageReference key="image" image="chevron.left" catalog="system" renderingMode="hierarchical">
+                                                <hierarchicalColors>
+                                                    <color white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color systemColor="secondaryLabelColor"/>
+                                                    <color systemColor="tertiaryLabelColor"/>
+                                                </hierarchicalColors>
+                                            </imageReference>
+                                            <connections>
+                                                <action selector="backButton:" destination="9c2-fS-qkS" id="9oZ-Bp-05g"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="09n-RG-HmV">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7u5-4e-lYJ">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ccell" id="MyF-oQ-GZ0" customClass="SportsCustomCollectionViewCell" customModule="SwiftProject_SportsApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="EiT-AV-SUZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="127.99999999999997" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="C1j-Cd-ZfT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="pag-QM-01e" firstAttribute="trailing" secondItem="C1j-Cd-ZfT" secondAttribute="trailing" id="3QJ-rn-sJf"/>
+                            <constraint firstItem="pag-QM-01e" firstAttribute="leading" secondItem="C1j-Cd-ZfT" secondAttribute="leading" id="6SA-Rv-YEK"/>
+                            <constraint firstItem="09n-RG-HmV" firstAttribute="top" secondItem="pag-QM-01e" secondAttribute="bottom" id="PLn-vk-fvd"/>
+                            <constraint firstItem="09n-RG-HmV" firstAttribute="leading" secondItem="C1j-Cd-ZfT" secondAttribute="leading" id="bqk-qE-cdk"/>
+                            <constraint firstItem="C1j-Cd-ZfT" firstAttribute="trailing" secondItem="09n-RG-HmV" secondAttribute="trailing" id="c6G-f1-GdI"/>
+                            <constraint firstItem="pag-QM-01e" firstAttribute="top" secondItem="C1j-Cd-ZfT" secondAttribute="top" id="j5z-yb-XjC"/>
+                            <constraint firstItem="C1j-Cd-ZfT" firstAttribute="bottom" secondItem="09n-RG-HmV" secondAttribute="bottom" id="ooB-UP-vHA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="leagueCollectionView" destination="09n-RG-HmV" id="EbM-ry-HEe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kyC-gO-uQb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2835.8778625954196" y="150.70422535211267"/>
         </scene>
         <!--Sports-->
         <scene sceneID="Gtj-nH-rTQ">
@@ -256,11 +329,12 @@
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="football" catalog="system" width="128" height="123"/>
         <image name="football.fill" catalog="system" width="128" height="119"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
-        <image name="square.split.2x2.fill" catalog="system" width="128" height="114"/>
+        <image name="list.bullet" catalog="system" width="128" height="87"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
