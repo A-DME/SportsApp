@@ -21,7 +21,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         leagueCollectionView.delegate = self
         leagueCollectionView.dataSource = self
         // Register cell classes
-        leagueCollectionView!.register(UINib(nibName: "SportsCustomCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ccell")
+        leagueCollectionView!.register(UINib(nibName: "LeagueEventCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ccell")
 
         let layout = UICollectionViewCompositionalLayout{index, environment in
             switch index{
@@ -44,22 +44,13 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(200))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(150))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 16)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 16, trailing: 0)
         
-//        section.visibleItemsInvalidationHandler = { (items, offset, environment) in
-//        items.forEach { item in
-//        let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
-//        let minScale: CGFloat = 0.8
-//        let maxScale: CGFloat = 1.0
-//        let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-//        item.transform = CGAffineTransform(scaleX: scale, y: scale)
-//        }
-//        }
         
         return section
     }
@@ -68,7 +59,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(0.95))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(150))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(200))
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0)
         
@@ -85,17 +76,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 16)
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .continuous
-        section.contentInsets = NSDirectionalEdgeInsets(top: 32, leading: 16, bottom: 16, trailing: 0)
-        
-//        section.visibleItemsInvalidationHandler = { (items, offset, environment) in
-//        items.forEach { item in
-//        let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2.0)
-//        let minScale: CGFloat = 0.8
-//        let maxScale: CGFloat = 1.0
-//        let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-//        item.transform = CGAffineTransform(scaleX: scale, y: scale)
-//        }
-//        }
+        section.contentInsets = NSDirectionalEdgeInsets(top: 32, leading: 8, bottom: 16, trailing: 0)
         
         return section
     }
@@ -124,10 +105,14 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath) as! SportsCustomCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath) as! LeagueEventCollectionViewCell
     
         // Configure the cell
-        cell.sportImage.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+//        cell.cellBackground.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+        cell.homeTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+        cell.awayTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+        cell.leagueLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+        cell.eventTime.text = "test event\nTime"
         return cell
     }
     

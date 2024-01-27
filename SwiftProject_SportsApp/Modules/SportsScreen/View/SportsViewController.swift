@@ -11,6 +11,9 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
 
     @IBOutlet weak var sportsCollection: UICollectionView!
     var twoCellsPerRow: Bool = true
+    
+    let sports = ["football", "basketball", "cricket", "tennis"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -18,29 +21,30 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
         sportsCollection.dataSource = self
         sportsCollection.register(UINib(nibName: "SportsCustomCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         self.navigationItem.title = "Sports"
+        self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: twoCellsPerRow ? "list.dash" : "square.grid.2x2")
+
 
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return 4
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SportsCustomCollectionViewCell
-        cell.sportImage.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-        //        cell.sportImage.image = UIImage(named: "zombieland")
-        cell.sportName.text = "Sport\(indexPath.row + 1)"
-//        cell.sportName.textColor = .black
         
-        // Configure the cell
-    
+        // TODO: - Put here the image of the sport from assets -- Done
+//        cell.sportImage.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+        cell.sportImage.image = UIImage(named: sports[indexPath.row])
+        
+        // TODO: - Put here the sport title -- Done(..ish)
+        cell.sportName.text = sports[indexPath.row].capitalized
+            
         return cell
     }
     
@@ -50,14 +54,16 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let leagues = self.storyboard?.instantiateViewController(withIdentifier: "leagues") as! LeaguesTableViewController
-        leagues.pageTitle = "testSport"
+        // TODO: -Put here the sport name.. also send the endpoint of the sport
+        leagues.pageTitle = sports[indexPath.row].capitalized + " Leagues"
         present(leagues, animated: true)
         
     }
     
     @IBAction func changeView(_ sender: Any) {
         twoCellsPerRow = !twoCellsPerRow
-//        self.navigationItem.rightBarButtonItem?.image = twoCellsPerRow ? .squaresIcon : .listIcon
+        self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: twoCellsPerRow ? "list.dash" : "square.grid.2x2")
+        
         sportsCollection.collectionViewLayout.invalidateLayout()
 
     }

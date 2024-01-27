@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 
 class LeaguesTableViewController: UITableViewController {
     @IBOutlet weak var sportTitle: UINavigationItem!
@@ -19,6 +21,7 @@ class LeaguesTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         sportTitle.title = pageTitle ?? "testSport"
+        tableView.register(UINib(nibName: "LeagueTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 //        self.navigationController?.navigationBar.shadowImage = UIImage()
 //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
@@ -32,7 +35,7 @@ class LeaguesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 5
+        return 16
     }
 
     @IBAction func backButton(_ sender: Any) {
@@ -40,9 +43,10 @@ class LeaguesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-        cell.textLabel?.text = "testLeague"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeagueTableViewCell
+        
+        cell.leagueBadge.kf.setImage(with: URL(string: "https://store.uefa.com/cdn/shop/files/UEFA_Europa_League_Button_d337b311-bcf3-425c-85a3-3862349a2dba_1600x.png?v=1655125196"))
+        cell.leagueName.text = "League Name \(indexPath.row + 1)"
 //        cell.layer.cornerRadius = 8
 //        cell.backgroundView?.backgroundColor = .black
 //        cell.applyShadow(cornerRadius: 8)
@@ -50,7 +54,7 @@ class LeaguesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 75
+        return 80
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
