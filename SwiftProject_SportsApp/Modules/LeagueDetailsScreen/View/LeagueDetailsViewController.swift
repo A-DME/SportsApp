@@ -12,17 +12,22 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
 
     
     @IBOutlet weak var leagueCollectionView: UICollectionView!
+    var isFavourite = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: isFavourite ? "heart.fill" : "heart")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         leagueCollectionView.delegate = self
         leagueCollectionView.dataSource = self
         // Register cell classes
-        leagueCollectionView!.register(UINib(nibName: "LeagueEventCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ccell")
 
+        leagueCollectionView!.register(UINib(nibName: "LeagueUpcomingEventCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "upCell")
+        leagueCollectionView!.register(UINib(nibName: "LeagueLatestEventCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "lateCell")
+        leagueCollectionView!.register(UINib(nibName: "LeagueTeamCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "teamCell")
+        
         let layout = UICollectionViewCompositionalLayout{index, environment in
             switch index{
             case 0 :
@@ -105,15 +110,35 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath) as! LeagueEventCollectionViewCell
+        switch indexPath.section {
+        case 0:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upCell", for: indexPath) as! LeagueUpcomingEventCollectionViewCell
+            cell.homeTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.awayTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.leagueLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.eventTime.text = "test event\nTime"
+            
+            return cell
+        case 1:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "lateCell", for: indexPath) as! LeagueLatestEventCollectionViewCell
+            cell.homeTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.awayTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.leagueLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.eventTime.text = "test event\nTime"
+            
+            return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! LeagueTeamCollectionViewCell
+            cell.teamLogo.kf.setImage(with: URL(string: "https://static.vecteezy.com/system/resources/thumbnails/010/884/779/small/lightning-skull-mascot-team-logo-png.png"))
+            
+            return cell
+        default:
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath)
+        }
     
         // Configure the cell
-//        cell.cellBackground.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-        cell.homeTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-        cell.awayTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-        cell.leagueLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-        cell.eventTime.text = "test event\nTime"
-        return cell
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -127,6 +152,13 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true)
     }
+    
+    
+    @IBAction func makeFavouriteButton(_ sender: Any) {
+        isFavourite = !isFavourite
+        self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: isFavourite ? "heart.fill" : "heart")
+    }
+    
     
     // MARK: UICollectionViewDelegate
 

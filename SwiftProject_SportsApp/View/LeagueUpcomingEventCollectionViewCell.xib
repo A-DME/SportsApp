@@ -9,39 +9,51 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LeagueEventCollectionViewCell" customModule="SwiftProject_SportsApp" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="554" height="258"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="LeagueUpcomingEventCollectionViewCell" customModule="SwiftProject_SportsApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="582" height="296"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="554" height="258"/>
+                <rect key="frame" x="0.0" y="0.0" width="582" height="296"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8vi-1m-hYd">
-                        <rect key="frame" x="0.0" y="0.0" width="554" height="258"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8vi-1m-hYd">
+                        <rect key="frame" x="0.0" y="0.0" width="582" height="296"/>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oJd-zt-Vty">
-                        <rect key="frame" x="16" y="79" width="100" height="100"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oJd-zt-Vty">
+                        <rect key="frame" x="16" y="98" width="100" height="100"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="buf-2E-DMk"/>
                             <constraint firstAttribute="height" constant="100" id="jyw-Qe-AaX"/>
                         </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="54a-wl-VNL">
-                        <rect key="frame" x="438" y="79" width="100" height="100"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="54a-wl-VNL">
+                        <rect key="frame" x="466" y="98" width="100" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="Qck-7C-ajZ"/>
                             <constraint firstAttribute="width" constant="100" id="afT-Ox-BIQ"/>
                         </constraints>
                     </imageView>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ze4-Gz-bmC">
-                        <rect key="frame" x="227" y="79" width="100" height="100"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ze4-Gz-bmC">
+                        <rect key="frame" x="241" y="98" width="100" height="100"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="4vf-n5-ShB"/>
                             <constraint firstAttribute="height" constant="100" id="IdZ-Dz-zkI"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gv3-Da-9Ey">
-                        <rect key="frame" x="256.33333333333331" y="7.9999999999999982" width="41.333333333333314" height="20.333333333333329"/>
+                        <rect key="frame" x="272.33333333333331" y="8" width="37.333333333333314" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJ8-xh-bWt">
+                        <rect key="frame" x="495" y="206" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOY-Fa-EDf">
+                        <rect key="frame" x="45" y="206" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -51,8 +63,11 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="oJd-zt-Vty" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="8Ty-n2-zAp"/>
+                <constraint firstItem="EOY-Fa-EDf" firstAttribute="top" secondItem="oJd-zt-Vty" secondAttribute="bottom" constant="8" id="8hE-tj-DXF"/>
+                <constraint firstItem="EOY-Fa-EDf" firstAttribute="centerX" secondItem="oJd-zt-Vty" secondAttribute="centerX" id="Br1-YX-s3T"/>
                 <constraint firstAttribute="trailing" secondItem="54a-wl-VNL" secondAttribute="trailing" constant="16" id="CkG-uQ-4Z6"/>
                 <constraint firstItem="8vi-1m-hYd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="F8b-r5-Ju3"/>
+                <constraint firstItem="VJ8-xh-bWt" firstAttribute="centerX" secondItem="54a-wl-VNL" secondAttribute="centerX" id="Fov-8A-268"/>
                 <constraint firstAttribute="bottom" secondItem="8vi-1m-hYd" secondAttribute="bottom" id="X8I-ez-cqU"/>
                 <constraint firstItem="8vi-1m-hYd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="X9J-zL-DI2"/>
                 <constraint firstItem="gv3-Da-9Ey" firstAttribute="centerX" secondItem="8vi-1m-hYd" secondAttribute="centerX" id="eJ0-YZ-OAQ"/>
@@ -62,16 +77,19 @@
                 <constraint firstItem="oJd-zt-Vty" firstAttribute="centerY" secondItem="8vi-1m-hYd" secondAttribute="centerY" id="nAl-Fq-djm"/>
                 <constraint firstAttribute="trailing" secondItem="8vi-1m-hYd" secondAttribute="trailing" id="oSb-Zi-CPa"/>
                 <constraint firstItem="54a-wl-VNL" firstAttribute="centerY" secondItem="8vi-1m-hYd" secondAttribute="centerY" id="pJH-K9-OCd"/>
+                <constraint firstItem="VJ8-xh-bWt" firstAttribute="top" secondItem="54a-wl-VNL" secondAttribute="bottom" constant="8" id="qu1-ON-zGW"/>
             </constraints>
-            <size key="customSize" width="554" height="258"/>
+            <size key="customSize" width="582" height="296"/>
             <connections>
                 <outlet property="awayTeamLogo" destination="54a-wl-VNL" id="icI-o4-mAQ"/>
+                <outlet property="awayTeamTitle" destination="VJ8-xh-bWt" id="tsL-yK-lfn"/>
                 <outlet property="cellBackground" destination="8vi-1m-hYd" id="FoQ-Po-jB1"/>
                 <outlet property="eventTime" destination="gv3-Da-9Ey" id="QCW-Nl-b8c"/>
                 <outlet property="homeTeamLogo" destination="oJd-zt-Vty" id="mO1-pn-TOa"/>
+                <outlet property="homeTeamTitle" destination="EOY-Fa-EDf" id="hFx-uu-Eb8"/>
                 <outlet property="leagueLogo" destination="Ze4-Gz-bmC" id="22q-5e-BqB"/>
             </connections>
-            <point key="canvasLocation" x="319.08396946564886" y="59.154929577464792"/>
+            <point key="canvasLocation" x="340.45801526717554" y="72.535211267605632"/>
         </collectionViewCell>
     </objects>
 </document>

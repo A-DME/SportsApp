@@ -1,5 +1,5 @@
 //
-//  LeagueEventCollectionViewCell.swift
+//  LeagueUpcomingEventCollectionViewCell.swift
 //  SwiftProject_SportsApp
 //
 //  Created by Ahmed Abu-zeid on 27/01/2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LeagueEventCollectionViewCell: UICollectionViewCell {
+class LeagueUpcomingEventCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var cellBackground: UIImageView!
     
@@ -15,7 +15,13 @@ class LeagueEventCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var homeTeamLogo: UIImageView!
     
+    @IBOutlet weak var homeTeamTitle: UILabel!
+    
     @IBOutlet weak var awayTeamLogo: UIImageView!
+    
+    
+    @IBOutlet weak var awayTeamTitle: UILabel!
+    
     
     @IBOutlet weak var eventTime: UILabel!
     

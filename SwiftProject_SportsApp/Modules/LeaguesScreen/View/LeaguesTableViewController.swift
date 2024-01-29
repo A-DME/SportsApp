@@ -14,7 +14,7 @@ class LeaguesTableViewController: UITableViewController {
     var pageTitle: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -110,13 +110,3 @@ class LeaguesTableViewController: UITableViewController {
 
 }
 
-extension UIView {
-    func applyShadow(cornerRadius: CGFloat) {
-        layer.cornerRadius = cornerRadius
-        layer.masksToBounds = false
-        layer.shadowRadius = 4.0
-        layer.shadowOpacity = 0.30
-        layer.shadowColor = UIColor.gray.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 5)
-    }
-}

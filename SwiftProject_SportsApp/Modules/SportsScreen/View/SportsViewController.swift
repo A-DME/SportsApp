@@ -22,6 +22,11 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
         sportsCollection.register(UINib(nibName: "SportsCustomCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         self.navigationItem.title = "Sports"
         self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: twoCellsPerRow ? "list.dash" : "square.grid.2x2")
+        
+        var networkHandler = NetworkHandler()
+        networkHandler.fetch(url: "https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies", type: [Movie].self) { movies in
+            print((movies?[2].Title)!)
+        }
 
 
     }
@@ -59,6 +64,8 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
         present(leagues, animated: true)
         
     }
+    
+    
     
     @IBAction func changeView(_ sender: Any) {
         twoCellsPerRow = !twoCellsPerRow
