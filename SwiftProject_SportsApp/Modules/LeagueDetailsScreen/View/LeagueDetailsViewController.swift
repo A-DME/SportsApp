@@ -13,6 +13,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBOutlet weak var leagueCollectionView: UICollectionView!
     var isFavourite = false
+    var leagueKey: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()

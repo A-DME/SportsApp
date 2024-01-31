@@ -11,10 +11,26 @@ import Kingfisher
 
 class LeaguesTableViewController: UITableViewController {
     @IBOutlet weak var sportTitle: UINavigationItem!
+    
     var pageTitle: String?
+    var sport: String?
+    var result: [League]?
+    var indicator: UIActivityIndicatorView?
     override func viewDidLoad() {
         super.viewDidLoad()
+        let networkHandler = NetworkHandler()
         
+        indicator = UIActivityIndicatorView.init(style: .large)
+        indicator?.center = self.view.center
+        indicator?.startAnimating()
+        self.view.addSubview(indicator!)
+        networkHandler.fetch(url: "https://apiv2.allsportsapi.com/\(sport!)/?met=Leagues&APIkey=c903dcab4b645dca2c5a353e9cce476cdf5f69c78e7519b95fb63df7fe5b8d76", type: Leagues.self) { leagues in
+            self.result = leagues?.result ?? []
+            DispatchQueue.main.async{
+                self.tableView.reloadData()
+                self.indicator?.stopAnimating()
+            }
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -35,7 +51,7 @@ class LeaguesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 16
+        return result?.count ?? 0
     }
 
     @IBAction func backButton(_ sender: Any) {
@@ -45,8 +61,8 @@ class LeaguesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeagueTableViewCell
         
-        cell.leagueBadge.kf.setImage(with: URL(string: "https://store.uefa.com/cdn/shop/files/UEFA_Europa_League_Button_d337b311-bcf3-425c-85a3-3862349a2dba_1600x.png?v=1655125196"))
-        cell.leagueName.text = "League Name \(indexPath.row + 1)"
+        cell.leagueBadge.kf.setImage(with: URL(string: result?[indexPath.row].league_logo ?? "https://store.uefa.com/cdn/shop/files/UEFA_Europa_League_Button_d337b311-bcf3-425c-85a3-3862349a2dba_1600x.png?v=1655125196"))
+        cell.leagueName.text = result?[indexPath.row].league_name ?? "League Name \(indexPath.row + 1)"
 //        cell.layer.cornerRadius = 8
 //        cell.backgroundView?.backgroundColor = .black
 //        cell.applyShadow(cornerRadius: 8)

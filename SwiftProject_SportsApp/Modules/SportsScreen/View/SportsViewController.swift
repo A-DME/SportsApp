@@ -23,10 +23,6 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.navigationItem.title = "Sports"
         self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: twoCellsPerRow ? "list.dash" : "square.grid.2x2")
         
-        var networkHandler = NetworkHandler()
-        networkHandler.fetch(url: "https://my-json-server.typicode.com/horizon-code-academy/fake-movies-api/movies", type: [Movie].self) { movies in
-            print((movies?[2].Title)!)
-        }
 
 
     }
@@ -57,10 +53,13 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         return CGSize(width: (twoCellsPerRow ? UIScreen.main.bounds.size.width/2 : UIScreen.main.bounds.size.width)-16, height: 160)
     }
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let leagues = self.storyboard?.instantiateViewController(withIdentifier: "leagues") as! LeaguesTableViewController
         // TODO: -Put here the sport name.. also send the endpoint of the sport
         leagues.pageTitle = sports[indexPath.row].capitalized + " Leagues"
+        leagues.sport = sports[indexPath.row]
         present(leagues, animated: true)
         
     }
