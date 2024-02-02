@@ -11,14 +11,139 @@ import Kingfisher
 class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     
+    
+    @IBOutlet weak var navItem: UINavigationItem!
+    
     @IBOutlet weak var leagueCollectionView: UICollectionView!
     var isFavourite = false
+    var sport: String?
     var leagueKey: Int?
+    var pageTitle: String?
+    var leagueDetailsViewModel: LeagueDetailsViewModel?
+    
+    var upcomingEvents: [Event]?
+    var latestEvents: [Event]?
+    var teams: [Teams]?
+    var indicator: UIActivityIndicatorView?
+    
+//    let queue = OperationQueue()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navItem.title = pageTitle
+        let networkHandler = NetworkHandler()
+        
+        indicator = UIActivityIndicatorView(style: .large)
+        indicator?.center = self.view.center
+        indicator?.startAnimating()
+        self.view.addSubview(indicator!)
+        
+        leagueDetailsViewModel = LeagueDetailsViewModel(networkHandler: networkHandler)
+        leagueDetailsViewModel?.sport = sport
+        leagueDetailsViewModel?.leagueKey = leagueKey
+        leagueDetailsViewModel?.loadData()
+        leagueDetailsViewModel?.bindResultToViewController = { [weak self] in
+            DispatchQueue.main.async {
+                self?.indicator?.stopAnimating()
+                self?.upcomingEvents = self?.leagueDetailsViewModel?.getUpEvents()
+                self?.latestEvents = self?.leagueDetailsViewModel?.getLateEvents()
+                print("beep1")
+                for event in self?.upcomingEvents ?? [] {
+                    self?.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
+                    self?.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
+                }
+                print("beep2")
+                for event in self?.latestEvents ?? [] {
+                    self?.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
+                    self?.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
+                }
+                print("beep3")
+                self?.teams = Array(Set(self?.teams ?? []))
+                print("beep4")
+                self?.leagueCollectionView.reloadData()
+                
+            }
+            
+        }
+        
+//        let block1 = BlockOperation {
+//            
+//            networkHandler.fetch(url: APIHandler.getURLFor(sport: self.sport!, get: .leagueEvents, leagueDetails: (self.leagueKey!, .upcoming)), type: Events.self) { upEvents in
+//                self.upcomingEvents = upEvents?.result
+//                print("1111")
+//            }
+//        }
+//        let block2 = BlockOperation {
+//            
+//            networkHandler.fetch(url: APIHandler.getURLFor(sport: self.sport!, get: .leagueEvents, leagueDetails: (self.leagueKey!, .latest)), type: Events.self) { lateEvents in
+//                self.latestEvents = lateEvents?.result
+//                print("2222")
+//                print(self.latestEvents?.count)
+//                for event in self.upcomingEvents ?? [] {
+//                    self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
+//                    self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
+//                }
+//                for event in self.latestEvents ?? [] {
+//                    self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
+//                    self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
+//                }
+//            }
+//        }
+        
+//        let block3 = BlockOperation {
+//            print("3333")
+//            for event in self.upcomingEvents ?? [] {
+//                self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
+//                self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
+//            }
+//            for event in self.latestEvents ?? [] {
+//                self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
+//                self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
+//            }
+//        }
+        
+//        let blockReload = BlockOperation {
+//            OperationQueue.main.addOperation{
+//                self.indicator?.stopAnimating()
+//                print("krkrkr")
+//                self.leagueCollectionView.reloadData()
+//            }
+//        }
+//        block2.addDependency(block1)
+////        block3.addDependency(block2)
+//        blockReload.addDependency(block2)
+//        
+//        queue.addOperations([block1, block2, blockReload], waitUntilFinished: true)
+//        
+//        networkHandler.fetch(url: APIHandler.getURLFor(sport: sport!, get: .leagueEvents, leagueDetails: (leagueKey!, .upcoming)), type: Events.self) { upEvents in
+//            self.upcomingEvents = upEvents?.result
+//            
+//            DispatchQueue.main.async {
+//                for event in upEvents!.result ?? [] {
+//                    self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
+//                    self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
+//                }
+//                
+//                self.leagueCollectionView.reloadData()
+//            }
+//        }
+//        networkHandler.fetch(url: APIHandler.getURLFor(sport: sport!, get: .leagueEvents, leagueDetails: (leagueKey!, .latest)), type: Events.self) { lateEvents in
+//            self.latestEvents = lateEvents?.result
+//            
+//            DispatchQueue.main.async {
+//                for event in lateEvents!.result ?? [] {
+//                    self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
+//                    self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
+//                }
+//                self.indicator?.stopAnimating()
+//                self.teams = Array(Set(self.teams ?? []))
+//                print(self.teams?.count ?? 0)
+//                self.leagueCollectionView.reloadData()
+//            }
+//        }
 
-        self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: isFavourite ? "heart.fill" : "heart")
+//        TODO: Fix the right bar button.. image not showing
+        navItem.rightBarButtonItem?.image = UIImage(systemName: isFavourite ? "heart.fill" : "heart")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         leagueCollectionView.delegate = self
@@ -107,30 +232,47 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 5
+        var result: Int?
+        switch section{
+            case 0:
+            result = upcomingEvents?.count
+        case 1:
+            result = latestEvents?.count
+        case 2:
+            result = teams?.count
+        default:
+            result = 0
+        }
+        return result ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upCell", for: indexPath) as! LeagueUpcomingEventCollectionViewCell
-            cell.homeTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.awayTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.leagueLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.eventTime.text = "test event\nTime"
+            cell.homeTeamLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].home_team_logo ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.awayTeamLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].away_team_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.leagueLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].league_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.eventTime.text = "\(upcomingEvents![indexPath.row].event_date ?? "eventDate" )\n\(upcomingEvents![indexPath.row].event_time ?? "eventTime")"
+            cell.homeTeamTitle.text = upcomingEvents![indexPath.row].event_home_team
+            cell.awayTeamTitle.text = upcomingEvents![indexPath.row].event_away_team
             
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "lateCell", for: indexPath) as! LeagueLatestEventCollectionViewCell
-            cell.homeTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.awayTeamLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.leagueLogo.kf.setImage(with: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.eventTime.text = "test event\nTime"
+            cell.homeTeamLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].home_team_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.awayTeamLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].away_team_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.leagueLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].league_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.eventTime.text = "\(latestEvents![indexPath.row].event_date ?? "eventDate" )\n\(latestEvents![indexPath.row].event_time ?? "eventTime")"
+            cell.matchResult.text = latestEvents![indexPath.row].event_final_result
+            cell.homeTeamTitle.text = latestEvents![indexPath.row].event_home_team
+            cell.awayTeamTitle.text = latestEvents![indexPath.row].event_away_team
             
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! LeagueTeamCollectionViewCell
-            cell.teamLogo.kf.setImage(with: URL(string: "https://static.vecteezy.com/system/resources/thumbnails/010/884/779/small/lightning-skull-mascot-team-logo-png.png"))
+            cell.teamLogo.kf.setImage(with: URL(string: teams?[indexPath.row].team_logo ?? "https://static.vecteezy.com/system/resources/thumbnails/010/884/779/small/lightning-skull-mascot-team-logo-png.png"))
+            cell.teamName.text = teams?[indexPath.row].team_title ?? "Team Name"
             
             return cell
         default:
@@ -145,6 +287,9 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 2{
             let teamScreen = self.storyboard?.instantiateViewController(withIdentifier: "teamDetails") as! TeamDetailsViewController
+            teamScreen.sport = sport
+            teamScreen.teamKey = teams?[indexPath.row].team_key
+            teamScreen.pageTitle = teams?[indexPath.row].team_title
             present(teamScreen, animated: true)
         }
     }
@@ -157,7 +302,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBAction func makeFavouriteButton(_ sender: Any) {
         isFavourite = !isFavourite
-        self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: isFavourite ? "heart.fill" : "heart")
+        navItem.rightBarButtonItem?.image = UIImage(systemName: isFavourite ? "heart.fill" : "heart")
     }
     
     

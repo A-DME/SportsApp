@@ -32,7 +32,7 @@ class LeagueUpcomingEventCollectionViewCell: UICollectionViewCell {
         homeTeamLogo.layer.cornerRadius = 15
         awayTeamLogo.layer.cornerRadius = 15
         leagueLogo.layer.cornerRadius = 15
-        cellBackground.image = UIImage(named: "versus")
+        cellBackground.image = .versusRB
     }
 
 }

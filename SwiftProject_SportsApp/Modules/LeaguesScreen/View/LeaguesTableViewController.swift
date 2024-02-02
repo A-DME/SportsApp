@@ -14,6 +14,8 @@ class LeaguesTableViewController: UITableViewController {
     
     var pageTitle: String?
     var sport: String?
+    
+    var leaguesViewModel: LeaguesViewModel?
     var result: [League]?
     var indicator: UIActivityIndicatorView?
     override func viewDidLoad() {
@@ -24,13 +26,25 @@ class LeaguesTableViewController: UITableViewController {
         indicator?.center = self.view.center
         indicator?.startAnimating()
         self.view.addSubview(indicator!)
-        networkHandler.fetch(url: "https://apiv2.allsportsapi.com/\(sport!)/?met=Leagues&APIkey=c903dcab4b645dca2c5a353e9cce476cdf5f69c78e7519b95fb63df7fe5b8d76", type: Leagues.self) { leagues in
-            self.result = leagues?.result ?? []
-            DispatchQueue.main.async{
-                self.tableView.reloadData()
-                self.indicator?.stopAnimating()
+        
+        leaguesViewModel = LeaguesViewModel(networkHandler: networkHandler)
+        leaguesViewModel?.sport = sport
+        leaguesViewModel?.loadData()
+        leaguesViewModel?.bindResultToViewController = { [weak self] in
+            DispatchQueue.main.async {
+                self?.indicator?.stopAnimating()
+                self?.result = self?.leaguesViewModel?.getNews()
+//                print(self?.result![0].league_name)
+                self?.tableView.reloadData()
             }
         }
+//        networkHandler.fetch(url:APIHandler.getURLFor(sport: sport!, get: .allLeagues), type: Leagues.self) { leagues in
+//            self.result = leagues?.result ?? []
+//            DispatchQueue.main.async{
+//                self.tableView.reloadData()
+//                self.indicator?.stopAnimating()
+//            }
+//        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -75,6 +89,10 @@ class LeaguesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let leagueDetails = self.storyboard?.instantiateViewController(withIdentifier: "leagueDetails") as! LeagueDetailsViewController
+        leagueDetails.sport = self.sport
+        leagueDetails.pageTitle = result?[indexPath.row].league_name
+        leagueDetails.leagueKey = result?[indexPath.row].league_key
+        
         present(leagueDetails, animated: true)
     }
     

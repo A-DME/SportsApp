@@ -189,6 +189,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="navItem" destination="rGS-3I-INr" id="5HQ-ea-1L4"/>
                         <outlet property="teamImage" destination="wHi-CG-VMc" id="qNa-ou-YAt"/>
                         <outlet property="teamMembers" destination="CNd-rn-ZD4" id="fub-d6-OYX"/>
                     </connections>
@@ -334,6 +335,7 @@
                     </view>
                     <connections>
                         <outlet property="leagueCollectionView" destination="09n-RG-HmV" id="EbM-ry-HEe"/>
+                        <outlet property="navItem" destination="L2f-Uk-LgO" id="0qc-fY-ubx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kyC-gO-uQb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -13,6 +13,7 @@ class LeagueTeamCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var teamLogo: UIImageView!
     
+    @IBOutlet weak var teamName: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

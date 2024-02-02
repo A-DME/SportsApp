@@ -33,7 +33,7 @@ class LeagueLatestEventCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         matchStatus.text = "Match Finished"
-        cellBackground.image = UIImage(named: "versus")
+        cellBackground.image = .versusRB
         cellBackground.layer.cornerRadius = 15
         
     }

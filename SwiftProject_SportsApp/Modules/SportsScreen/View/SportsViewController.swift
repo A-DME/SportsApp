@@ -22,9 +22,7 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
         sportsCollection.register(UINib(nibName: "SportsCustomCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "cell")
         self.navigationItem.title = "Sports"
         self.navigationItem.rightBarButtonItem?.image = UIImage(systemName: twoCellsPerRow ? "list.dash" : "square.grid.2x2")
-        
-
-
+        print(APIHandler.getURLFor(sport: sports[0], get: .leagueEvents, leagueDetails: (4, .upcoming)))
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -33,7 +31,7 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return sports.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
