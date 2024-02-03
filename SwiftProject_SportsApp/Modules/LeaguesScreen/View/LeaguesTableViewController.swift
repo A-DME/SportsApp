@@ -12,12 +12,17 @@ import Kingfisher
 class LeaguesTableViewController: UITableViewController {
     @IBOutlet weak var sportTitle: UINavigationItem!
     
-    var pageTitle: String?
-    var sport: String?
+    var pageTitle: String!
+    var sport: String!
     
     var leaguesViewModel: LeaguesViewModel?
     var result: [League]?
+    var favouriteLeaguesKeys: [Int]?
     var indicator: UIActivityIndicatorView?
+
+    var dummyLeagueLogo = "https://rovenlogos.com/wp-content/uploads/2021/12/rovenlogos_footballleague_light.png"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let networkHandler = NetworkHandler()
@@ -33,7 +38,9 @@ class LeaguesTableViewController: UITableViewController {
         leaguesViewModel?.bindResultToViewController = { [weak self] in
             DispatchQueue.main.async {
                 self?.indicator?.stopAnimating()
-                self?.result = self?.leaguesViewModel?.getNews()
+                self?.result = self?.leaguesViewModel?.getLeagues()
+                self?.favouriteLeaguesKeys = self?.leaguesViewModel?.getKeysOfFavouriteLeagues(sport: (self?.sport)!)
+                print(self?.favouriteLeaguesKeys)
 //                print(self?.result![0].league_name)
                 self?.tableView.reloadData()
             }
@@ -65,6 +72,12 @@ class LeaguesTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        if result?.count == 0 {
+        tableView.setEmptyView(title: "No Internet Connection.", message: "Please connect to a network to view the leagues.")
+        }
+        else {
+        tableView.restore()
+        }
         return result?.count ?? 0
     }
 
@@ -75,7 +88,7 @@ class LeaguesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeagueTableViewCell
         
-        cell.leagueBadge.kf.setImage(with: URL(string: result?[indexPath.row].league_logo ?? "https://store.uefa.com/cdn/shop/files/UEFA_Europa_League_Button_d337b311-bcf3-425c-85a3-3862349a2dba_1600x.png?v=1655125196"))
+        cell.leagueBadge.kf.setImage(with: URL(string: result?[indexPath.row].league_logo ?? dummyLeagueLogo))
         cell.leagueName.text = result?[indexPath.row].league_name ?? "League Name \(indexPath.row + 1)"
 //        cell.layer.cornerRadius = 8
 //        cell.backgroundView?.backgroundColor = .black
@@ -89,8 +102,11 @@ class LeaguesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let leagueDetails = self.storyboard?.instantiateViewController(withIdentifier: "leagueDetails") as! LeagueDetailsViewController
+        let key = result?[indexPath.row].league_key
+        leagueDetails.isFavourite = favouriteLeaguesKeys?.contains(key!)
         leagueDetails.sport = self.sport
         leagueDetails.pageTitle = result?[indexPath.row].league_name
+        leagueDetails.league = result?[indexPath.row]
         leagueDetails.leagueKey = result?[indexPath.row].league_key
         
         present(leagueDetails, animated: true)

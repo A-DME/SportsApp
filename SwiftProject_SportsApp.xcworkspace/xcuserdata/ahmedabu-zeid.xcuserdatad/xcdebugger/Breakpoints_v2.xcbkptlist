@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AADB7227-468E-4A61-9BD9-A32A608BB965"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SwiftProject_SportsApp/Modules/LeagueDetailsScreen/View/LeagueDetailsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "07067D04-0891-499B-A3E7-25AD2029F623"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -34,6 +18,102 @@
             endingLineNumber = "53"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0A0F8963-A7E3-4F28-9198-0D617A5D6C5B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftProject_SportsApp/Services/CoreDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "deleteFromCoreData(leagueKey:sport:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0A0F8963-A7E3-4F28-9198-0D617A5D6C5B - ea479454ab7a392c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftProject_SportsApp.CoreDataManager.deleteFromCoreData(league: SwiftProject_SportsApp.League, sport: Swift.String) -&gt; ()"
+                  moduleName = "SwiftProject_SportsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ahmedabu-zeid/Documents/iOS%20Apps/SwiftProject_SportsApp/SwiftProject_SportsApp/Services/CoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "2877">
+               </Location>
+               <Location
+                  uuid = "0A0F8963-A7E3-4F28-9198-0D617A5D6C5B - 38728921b9ae6ba"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftProject_SportsApp.CoreDataManager.deleteFromCoreData(leagueKey: Swift.Int, sport: Swift.String) -&gt; ()"
+                  moduleName = "SwiftProject_SportsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ahmedabu-zeid/Documents/iOS%20Apps/SwiftProject_SportsApp/SwiftProject_SportsApp/Services/CoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "75"
+                  endingLineNumber = "75"
+                  offsetFromSymbolStart = "214">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1FE66C47-178D-450C-9871-38F3E49AC551"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftProject_SportsApp/Services/CoreDataManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
+            landmarkName = "deleteFromCoreData(leagueKey:sport:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1FE66C47-178D-450C-9871-38F3E49AC551 - ea479454ab7a396a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftProject_SportsApp.CoreDataManager.deleteFromCoreData(league: SwiftProject_SportsApp.League, sport: Swift.String) -&gt; ()"
+                  moduleName = "SwiftProject_SportsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ahmedabu-zeid/Documents/iOS%20Apps/SwiftProject_SportsApp/SwiftProject_SportsApp/Services/CoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "1758">
+               </Location>
+               <Location
+                  uuid = "1FE66C47-178D-450C-9871-38F3E49AC551 - 38728921b9ae69b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SwiftProject_SportsApp.CoreDataManager.deleteFromCoreData(leagueKey: Swift.Int, sport: Swift.String) -&gt; ()"
+                  moduleName = "SwiftProject_SportsApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ahmedabu-zeid/Documents/iOS%20Apps/SwiftProject_SportsApp/SwiftProject_SportsApp/Services/CoreDataManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "242">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

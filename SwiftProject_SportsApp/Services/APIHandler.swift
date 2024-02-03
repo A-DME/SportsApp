@@ -73,6 +73,11 @@ class APIHandler{
 
     }
     
+    
+    // baseURL + sport + leaguesBlock + apiKey
+    // baseURL + sport + league_Block,leagueID + Duration(from and to) + apiKey
+    // baseURL + sport + team_Block,teamID + apiKey
+    
     /*
      string statement of a url
      

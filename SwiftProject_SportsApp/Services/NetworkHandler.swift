@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 
 class NetworkHandler{
@@ -14,11 +15,8 @@ class NetworkHandler{
         guard let newURL = url else {
             complitionHandler(nil)
             return  }
-        
-        let request = URLRequest(url: newURL)
-        let session = URLSession(configuration: .default)
-        let task = session.dataTask(with: request) { data, response, error in
-            guard let data = data else {
+        AF.request(newURL).response { data in
+            guard let data = data.data else {
                 complitionHandler(nil)
                 return  }
             print("fetching in background")
@@ -30,7 +28,22 @@ class NetworkHandler{
                 complitionHandler(nil)
             }
         }
-        task.resume()
+//        let request = URLRequest(url: newURL)
+//        let session = URLSession(configuration: .default)
+//        let task = session.dataTask(with: request) { data, response, error in
+//            guard let data = data else {
+//                complitionHandler(nil)
+//                return  }
+//            print("fetching in background")
+//            do{
+//                let result = try JSONDecoder().decode(T.self, from: data)
+//                complitionHandler(result)
+//            }catch let error{
+//                print(error.localizedDescription)
+//                complitionHandler(nil)
+//            }
+//        }
+//        task.resume()
     }
     
 }

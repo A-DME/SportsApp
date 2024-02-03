@@ -15,8 +15,9 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     @IBOutlet weak var navItem: UINavigationItem!
     
     @IBOutlet weak var leagueCollectionView: UICollectionView!
-    var isFavourite = false
-    var sport: String?
+    var isFavourite : Bool!
+    var sport: String!
+    var league: League!
     var leagueKey: Int?
     var pageTitle: String?
     var leagueDetailsViewModel: LeagueDetailsViewModel?
@@ -25,7 +26,8 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     var latestEvents: [Event]?
     var teams: [Teams]?
     var indicator: UIActivityIndicatorView?
-    
+    var dummyLeagueLogo = "https://rovenlogos.com/wp-content/uploads/2021/12/rovenlogos_footballleague_light.png"
+    var dummyTeamLogo = "https://cdn-icons-png.freepik.com/512/9192/9192876.png"
 //    let queue = OperationQueue()
     
     override func viewDidLoad() {
@@ -250,9 +252,9 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         switch indexPath.section {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upCell", for: indexPath) as! LeagueUpcomingEventCollectionViewCell
-            cell.homeTeamLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].home_team_logo ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.awayTeamLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].away_team_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.leagueLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].league_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.homeTeamLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].home_team_logo ?? dummyTeamLogo))
+            cell.awayTeamLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].away_team_logo ??  dummyTeamLogo))
+            cell.leagueLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].league_logo ??  dummyLeagueLogo))
             cell.eventTime.text = "\(upcomingEvents![indexPath.row].event_date ?? "eventDate" )\n\(upcomingEvents![indexPath.row].event_time ?? "eventTime")"
             cell.homeTeamTitle.text = upcomingEvents![indexPath.row].event_home_team
             cell.awayTeamTitle.text = upcomingEvents![indexPath.row].event_away_team
@@ -260,9 +262,9 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "lateCell", for: indexPath) as! LeagueLatestEventCollectionViewCell
-            cell.homeTeamLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].home_team_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.awayTeamLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].away_team_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
-            cell.leagueLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].league_logo ??  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRne-fOL3PU7hLNWbwNSsYfgRLFdFFa5cY4ouFFs0vo0A&s"))
+            cell.homeTeamLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].home_team_logo ??  dummyTeamLogo))
+            cell.awayTeamLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].away_team_logo ?? dummyTeamLogo))
+            cell.leagueLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].league_logo ?? dummyLeagueLogo))
             cell.eventTime.text = "\(latestEvents![indexPath.row].event_date ?? "eventDate" )\n\(latestEvents![indexPath.row].event_time ?? "eventTime")"
             cell.matchResult.text = latestEvents![indexPath.row].event_final_result
             cell.homeTeamTitle.text = latestEvents![indexPath.row].event_home_team
@@ -271,7 +273,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! LeagueTeamCollectionViewCell
-            cell.teamLogo.kf.setImage(with: URL(string: teams?[indexPath.row].team_logo ?? "https://static.vecteezy.com/system/resources/thumbnails/010/884/779/small/lightning-skull-mascot-team-logo-png.png"))
+            cell.teamLogo.kf.setImage(with: URL(string: teams?[indexPath.row].team_logo ?? dummyTeamLogo))
             cell.teamName.text = teams?[indexPath.row].team_title ?? "Team Name"
             
             return cell
@@ -303,6 +305,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     @IBAction func makeFavouriteButton(_ sender: Any) {
         isFavourite = !isFavourite
         navItem.rightBarButtonItem?.image = UIImage(systemName: isFavourite ? "heart.fill" : "heart")
+        leagueDetailsViewModel?.editInCoreData(league: league, sport: sport!, favourite: isFavourite)
     }
     
     

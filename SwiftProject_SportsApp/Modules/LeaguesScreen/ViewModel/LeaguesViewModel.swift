@@ -10,6 +10,7 @@ import Foundation
 
 class LeaguesViewModel{
     var networkHandler: NetworkHandler?
+    var coreDataManager: CoreDataManager?
     var bindResultToViewController : (()->()) = {}
     var sport: String!
     var result : [League]?  {
@@ -20,17 +21,23 @@ class LeaguesViewModel{
     
     init(networkHandler: NetworkHandler?) {
         self.networkHandler = networkHandler
+        coreDataManager = CoreDataManager()
     }
     
     func loadData(){
         networkHandler?.fetch(url: APIHandler.getURLFor(sport: sport, get: .allLeagues), type: Leagues.self, complitionHandler: { leagues in
             self.result = leagues?.result
         })
+        coreDataManager?.fetchFromCoreData()
         
     }
     
-    func getNews()->[League]{
+    func getLeagues()->[League]{
         return result ?? []
+    }
+    
+    func getKeysOfFavouriteLeagues(sport: String)->[Int]{
+        return coreDataManager?.getDataKeys(leagues: coreDataManager?.getStoredDataFiltered(for: sport) ?? []) ?? []
     }
     
     

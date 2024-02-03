@@ -1,0 +1,187 @@
+//
+//  FavouriteLeaguesTableViewController.swift
+//  SwiftProject_SportsApp
+//
+//  Created by Ahmed Abu-zeid on 02/02/2024.
+//
+
+import UIKit
+import CoreData
+import Kingfisher
+
+class FavouriteLeaguesTableViewController: UITableViewController {
+
+    
+    @IBOutlet weak var navItem: UINavigationItem!
+    var favouritesViewModel: FavouritesViewModel?
+    var favouriteLeagues: [NSManagedObject]?
+    var dummyLeagueLogo = "https://rovenlogos.com/wp-content/uploads/2021/12/rovenlogos_footballleague_light.png"
+
+    var indicator: UIActivityIndicatorView?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        favouritesViewModel = FavouritesViewModel()
+        indicator = UIActivityIndicatorView(style: .large)
+        indicator?.center = self.view.center
+        indicator?.startAnimating()
+        self.view.addSubview(indicator!)
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        navItem.title = "Favourite Leagues"
+        self.tableView.register(UINib(nibName: "LeagueTableViewCell", bundle: nil), forCellReuseIdentifier: "fcell")
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+//        favouritesViewModel?.loadData()
+//        favouritesViewModel?.bindResultToViewController = { [weak self] in
+//            DispatchQueue.main.async {
+//                self?.favouriteLeagues = self?.favouritesViewModel?.getFavouriteLeagues()
+//                self?.indicator?.stopAnimating()
+//                self?.tableView.reloadData()
+//            }
+//        }
+    }
+   
+    override func viewWillAppear(_ animated: Bool) {
+        favouritesViewModel?.loadData()
+        favouritesViewModel?.bindResultToViewController = { [weak self] in
+            DispatchQueue.main.async {
+                self?.favouriteLeagues = self?.favouritesViewModel?.getFavouriteLeagues()
+                self?.indicator?.stopAnimating()
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
+        
+    
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        if favouriteLeagues?.count == 0{
+        tableView.setEmptyView(title: "You don't have any favourite leagues.", message: "Your favourite leagues will be in here.")
+        }
+        else {
+        tableView.restore()
+        }
+        return favouriteLeagues?.count ?? 0
+    }
+
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "fcell") as! LeagueTableViewCell
+
+        cell.leagueName.text = (favouriteLeagues?[indexPath.row].value(forKey: "league_name") as! String)
+        cell.leagueBadge.kf.setImage(with: URL(string: (favouriteLeagues?[indexPath.row].value(forKey: "league_logo") as? String) ?? dummyLeagueLogo))
+
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if Reachability.isConnectedToNetwork(){
+            let leagueDetails = self.storyboard?.instantiateViewController(withIdentifier: "leagueDetails") as! LeagueDetailsViewController
+            let league = favouritesViewModel?.convertToLeague(nsLeague: (favouriteLeagues?[indexPath.row])!)
+            leagueDetails.sport = (favouriteLeagues?[indexPath.row].value(forKey: "sport") as! String)
+            leagueDetails.pageTitle = league?.league_name
+            leagueDetails.league = league
+            leagueDetails.leagueKey = league?.league_key
+            leagueDetails.isFavourite = true
+            
+            present(leagueDetails, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Network Error", message: "No network connection found, cannot load data!", preferredStyle: .alert)
+            let ok = UIAlertAction(title: "OK", style: .cancel)
+            alert.addAction(ok)
+            present(alert, animated: true)
+        }
+    }
+    
+
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
+
+
+extension UITableView {
+func setEmptyView(title: String, message: String) {
+let emptyView = UIView(frame: CGRect(x: self.center.x, y: self.center.y, width: self.bounds.size.width, height: self.bounds.size.height))
+let titleLabel = UILabel()
+let messageLabel = UILabel()
+titleLabel.translatesAutoresizingMaskIntoConstraints = false
+messageLabel.translatesAutoresizingMaskIntoConstraints = false
+titleLabel.textColor = UIColor.black
+titleLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 18)
+messageLabel.textColor = UIColor.lightGray
+messageLabel.font = UIFont(name: "HelveticaNeue-Regular", size: 17)
+emptyView.addSubview(titleLabel)
+emptyView.addSubview(messageLabel)
+titleLabel.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor).isActive = true
+titleLabel.centerXAnchor.constraint(equalTo: emptyView.centerXAnchor).isActive = true
+messageLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
+messageLabel.leftAnchor.constraint(equalTo: emptyView.leftAnchor, constant: 20).isActive = true
+messageLabel.rightAnchor.constraint(equalTo: emptyView.rightAnchor, constant: -20).isActive = true
+titleLabel.text = title
+messageLabel.text = message
+messageLabel.numberOfLines = 0
+messageLabel.textAlignment = .center
+// The only tricky part is here:
+self.backgroundView = emptyView
+self.separatorStyle = .none
+}
+func restore() {
+self.backgroundView = nil
+self.separatorStyle = .singleLine
+}
+}

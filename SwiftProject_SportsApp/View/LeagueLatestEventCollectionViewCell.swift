@@ -35,6 +35,7 @@ class LeagueLatestEventCollectionViewCell: UICollectionViewCell {
         matchStatus.text = "Match Finished"
         cellBackground.image = .versusRB
         cellBackground.layer.cornerRadius = 15
+        leagueLogo.layer.cornerRadius = 15
         
     }
 

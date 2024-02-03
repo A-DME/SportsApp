@@ -12,6 +12,7 @@ class LeagueDetailsViewModel{
     var bindResultToViewController : (()->()) = {}
     var sport: String!
     var leagueKey: Int!
+    var coreDataManager: CoreDataManager?
     
     var upEvents: [Event]? {
         didSet{
@@ -26,16 +27,27 @@ class LeagueDetailsViewModel{
         
     init(networkHandler: NetworkHandler?) {
         self.networkHandler = networkHandler
+        self.coreDataManager = CoreDataManager()
     }
     
     func loadData(){
         networkHandler?.fetch(url: APIHandler.getURLFor(sport: sport, get: .leagueEvents, leagueDetails: (leagueKey,.upcoming)), type: Events.self, complitionHandler: { upcoming in
             self.upEvents = upcoming?.result
         })
-        networkHandler?.fetch(url: APIHandler.getURLFor(sport: sport, get: .leagueEvents, leagueDetails: (leagueKey,.latest)), type: Events.self, complitionHandler: { latest in
+        let url = APIHandler.getURLFor(sport: sport, get: .leagueEvents, leagueDetails: (leagueKey,.latest))
+        print(url)
+        networkHandler?.fetch(url: url, type: Events.self, complitionHandler: { latest in
             self.lateEvents = latest?.result
         })
         
+    }
+    
+    func editInCoreData(league: League, sport: String, favourite: Bool){
+        if favourite{
+            coreDataManager?.insertIntoCoreData(favLeague: league, sport: sport)
+        } else {
+            coreDataManager?.deleteFromCoreData(leagueKey: (league.league_key)!, sport: sport)
+        }
     }
     
     func getUpEvents()->[Event]{

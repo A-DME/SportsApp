@@ -13,6 +13,7 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
     var twoCellsPerRow: Bool = true
     
     let sports = ["football", "basketball", "cricket", "tennis"]
+    // TODO: create a dummy league logos and put the urls of them.. make'm travel acrross the app
     
     override func viewDidLoad() {
         super.viewDidLoad()

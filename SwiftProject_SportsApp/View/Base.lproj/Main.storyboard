@@ -211,24 +211,39 @@
                     </tabBar>
                     <connections>
                         <segue destination="C7d-Cc-4le" kind="relationship" relationship="viewControllers" id="Cgf-cH-ML4"/>
-                        <segue destination="RHc-NK-IJy" kind="relationship" relationship="viewControllers" id="3ZG-cp-kca"/>
+                        <segue destination="7o4-68-ISF" kind="relationship" relationship="viewControllers" id="kgz-Ci-bsY"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RHo-p0-hbd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1274" y="152"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Favourites-->
         <scene sceneID="3Ff-p1-4Qf">
             <objects>
-                <tableViewController id="7o4-68-ISF" sceneMemberID="viewController">
+                <tableViewController id="7o4-68-ISF" customClass="FavouriteLeaguesTableViewController" customModule="SwiftProject_SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="1CR-QP-qM8">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" clipsSubviews="YES" contentMode="scaleToFill" id="Fcu-N9-6D2">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <navigationBar clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PMs-x6-eJJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <items>
+                                        <navigationItem title="Title" id="fqb-8m-soM"/>
+                                    </items>
+                                </navigationBar>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="fcell" id="rxf-iY-jBf">
-                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="fcell" id="rxf-iY-jBf" customClass="LeagueTableViewCell" customModule="SwiftProject_SportsApp" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="94" width="393" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rxf-iY-jBf" id="1Ra-2z-GPY">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
@@ -241,11 +256,16 @@
                             <outlet property="delegate" destination="7o4-68-ISF" id="XdC-dy-mvj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="QYa-Qu-a9u"/>
+                    <tabBarItem key="tabBarItem" title="Favourites" image="heart" catalog="system" id="tJ6-ak-n12">
+                        <imageReference key="selectedImage" image="heart.fill" catalog="system" renderingMode="original"/>
+                    </tabBarItem>
+                    <connections>
+                        <outlet property="navItem" destination="fqb-8m-soM" id="y5o-wt-IzG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5oI-V4-vmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1931" y="511"/>
+            <point key="canvasLocation" x="4" y="318"/>
         </scene>
         <!--League Details View Controller-->
         <scene sceneID="Auk-DD-ebO">
@@ -369,27 +389,6 @@
             </objects>
             <point key="canvasLocation" x="4" y="-406"/>
         </scene>
-        <!--Favourites-->
-        <scene sceneID="bhd-yU-07g">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RHc-NK-IJy" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favourites" image="heart" catalog="system" id="pIv-tw-Aaq">
-                        <imageReference key="selectedImage" image="heart.fill" catalog="system" renderingMode="original"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gpd-PX-a50">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="7o4-68-ISF" kind="relationship" relationship="rootViewController" id="Qu5-vZ-B1d"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KYm-4t-0rh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="517" y="511"/>
-        </scene>
     </scenes>
     <resources>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
@@ -398,13 +397,13 @@
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tertiaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
