@@ -68,84 +68,10 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
             
         }
         
-//        let block1 = BlockOperation {
-//            
-//            networkHandler.fetch(url: APIHandler.getURLFor(sport: self.sport!, get: .leagueEvents, leagueDetails: (self.leagueKey!, .upcoming)), type: Events.self) { upEvents in
-//                self.upcomingEvents = upEvents?.result
-//                print("1111")
-//            }
-//        }
-//        let block2 = BlockOperation {
-//            
-//            networkHandler.fetch(url: APIHandler.getURLFor(sport: self.sport!, get: .leagueEvents, leagueDetails: (self.leagueKey!, .latest)), type: Events.self) { lateEvents in
-//                self.latestEvents = lateEvents?.result
-//                print("2222")
-//                print(self.latestEvents?.count)
-//                for event in self.upcomingEvents ?? [] {
-//                    self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
-//                    self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
-//                }
-//                for event in self.latestEvents ?? [] {
-//                    self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
-//                    self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
-//                }
-//            }
-//        }
-        
-//        let block3 = BlockOperation {
-//            print("3333")
-//            for event in self.upcomingEvents ?? [] {
-//                self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
-//                self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
-//            }
-//            for event in self.latestEvents ?? [] {
-//                self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
-//                self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
-//            }
-//        }
-        
-//        let blockReload = BlockOperation {
-//            OperationQueue.main.addOperation{
-//                self.indicator?.stopAnimating()
-//                print("krkrkr")
-//                self.leagueCollectionView.reloadData()
-//            }
-//        }
-//        block2.addDependency(block1)
-////        block3.addDependency(block2)
-//        blockReload.addDependency(block2)
-//        
-//        queue.addOperations([block1, block2, blockReload], waitUntilFinished: true)
-//        
-//        networkHandler.fetch(url: APIHandler.getURLFor(sport: sport!, get: .leagueEvents, leagueDetails: (leagueKey!, .upcoming)), type: Events.self) { upEvents in
-//            self.upcomingEvents = upEvents?.result
-//            
-//            DispatchQueue.main.async {
-//                for event in upEvents!.result ?? [] {
-//                    self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
-//                    self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
-//                }
-//                
-//                self.leagueCollectionView.reloadData()
-//            }
-//        }
-//        networkHandler.fetch(url: APIHandler.getURLFor(sport: sport!, get: .leagueEvents, leagueDetails: (leagueKey!, .latest)), type: Events.self) { lateEvents in
-//            self.latestEvents = lateEvents?.result
-//            
-//            DispatchQueue.main.async {
-//                for event in lateEvents!.result ?? [] {
-//                    self.teams?.append(Teams(team_title: event.event_away_team ?? "", team_logo: event.away_team_logo ?? "", team_key: event.away_team_key!))
-//                    self.teams?.append(Teams(team_title: event.event_home_team ?? "", team_logo: event.home_team_logo ?? "", team_key: event.home_team_key!))
-//                }
-//                self.indicator?.stopAnimating()
-//                self.teams = Array(Set(self.teams ?? []))
-//                print(self.teams?.count ?? 0)
-//                self.leagueCollectionView.reloadData()
-//            }
-//        }
 
-//        TODO: Fix the right bar button.. image not showing
+//        TODO: Fix the right bar button.. image not showing (Done)
         navItem.rightBarButtonItem?.image = UIImage(systemName: isFavourite ? "heart.fill" : "heart")
+        navItem.rightBarButtonItem?.tintColor = .red
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         leagueCollectionView.delegate = self
@@ -170,7 +96,6 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         }
         leagueCollectionView.setCollectionViewLayout(layout, animated: true)
     
-        // Do any additional setup after loading the view.
     }
     
     func drawTheTopSection()-> NSCollectionLayoutSection{
@@ -214,15 +139,6 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         return section
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     // MARK: UICollectionViewDataSource
 
@@ -233,7 +149,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
 
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+        
         var result: Int?
         switch section{
             case 0:
@@ -280,9 +196,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         default:
             return collectionView.dequeueReusableCell(withReuseIdentifier: "ccell", for: indexPath)
         }
-    
-        // Configure the cell
-        
+            
         
     }
     
@@ -308,36 +222,4 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         leagueDetailsViewModel?.editInCoreData(league: league, sport: sport!, favourite: isFavourite)
     }
     
-    
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }

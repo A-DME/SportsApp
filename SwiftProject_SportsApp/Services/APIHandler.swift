@@ -17,7 +17,7 @@ class APIHandler{
     enum Dates {
         case currentYear, lastYear, nextYear
     }
-    private class func getDateOf(_ spec: Dates) -> String{
+    class func getDateOf(_ spec: Dates) -> String{
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let year: Double = 365 * 24 * 60 * 60

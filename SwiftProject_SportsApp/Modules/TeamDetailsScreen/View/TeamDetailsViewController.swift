@@ -46,30 +46,11 @@ class TeamDetailsViewController: UIViewController, UITableViewDelegate, UITableV
                 self?.teamMembers.reloadData()
             }
         }
-//        networkHandler.fetch(url: APIHandler.getURLFor(sport: sport, get: .team, teamKey: teamKey), type: Team.self) { team in
-//            self.team = team
-//            DispatchQueue.main.async {
-//                self.indicator?.stopAnimating()
-//                self.teamMembers.reloadData()
-//                self.teamImage.kf.setImage(with: URL(string: team?.team_logo ?? "https://media.istockphoto.com/id/464558990/photo/stadium-night-in-a-soccer-stadium.jpg?s=612x612&w=0&k=20&c=S7lz2Qn-4eFrSrB5x2txzksOshDwNB3HKIKn14FaTrc="))
-//
-//            }
-//        }
-        
+
         teamMembers.register(UINib(nibName: "LeagueTableViewCell", bundle: nil), forCellReuseIdentifier: "playerCell")
-                // Do any additional setup after loading the view.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
