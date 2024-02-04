@@ -29,7 +29,6 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     var indicator: UIActivityIndicatorView?
     var dummyLeagueLogo = "https://rovenlogos.com/wp-content/uploads/2021/12/rovenlogos_footballleague_light.png"
     var dummyTeamLogo = "https://cdn-icons-png.freepik.com/512/9192/9192876.png"
-//    let queue = OperationQueue()
     
     override func viewDidLoad() {
         super.viewDidLoad()

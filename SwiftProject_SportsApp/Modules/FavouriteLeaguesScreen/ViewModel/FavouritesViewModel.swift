@@ -11,11 +11,7 @@ import CoreData
 class FavouritesViewModel {
     var coreDataManager: CoreDataManager!
     var bindResultToViewController : (()->()) = {}
-    var result : [NSManagedObject]?  {
-        didSet{
-            bindResultToViewController()
-        }
-    }
+    var result : [NSManagedObject]?  
     
     init() {
         coreDataManager = CoreDataManager()

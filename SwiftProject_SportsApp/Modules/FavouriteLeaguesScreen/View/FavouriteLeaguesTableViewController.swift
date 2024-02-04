@@ -34,13 +34,9 @@ class FavouriteLeaguesTableViewController: UITableViewController {
    
     override func viewDidAppear(_ animated: Bool) {
         favouritesViewModel?.loadData()
-        favouritesViewModel?.bindResultToViewController = { [weak self] in
-            self?.favouriteLeagues = self?.favouritesViewModel?.getFavouriteLeagues()
-            DispatchQueue.main.async {
-                self?.indicator?.stopAnimating()
-                self?.tableView.reloadData()
-            }
-        }
+        favouriteLeagues = favouritesViewModel?.getFavouriteLeagues()
+            indicator?.stopAnimating()
+            self.tableView.reloadData()
     }
 
         
