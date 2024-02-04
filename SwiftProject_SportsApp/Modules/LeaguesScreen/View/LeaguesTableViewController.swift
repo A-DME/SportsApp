@@ -8,13 +8,14 @@
 import UIKit
 import Kingfisher
 
+protocol ReloadFavouriteLeaguesArray{
+    func reloadArray()
+}
 
-class LeaguesTableViewController: UITableViewController {
-    @IBOutlet weak var navItem: UINavigationItem!
+
+class LeaguesTableViewController: UITableViewController, ReloadFavouriteLeaguesArray {
     
-    var pageTitle: String!
     var sport: String!
-    
     var leaguesViewModel: LeaguesViewModel?
     var result: [League]?
     var favouriteLeaguesKeys: [Int]?
@@ -34,22 +35,18 @@ class LeaguesTableViewController: UITableViewController {
         
         leaguesViewModel = LeaguesViewModel(networkHandler: networkHandler)
         leaguesViewModel?.sport = sport
-        leaguesViewModel?.loadData()
+        leaguesViewModel?.loadDataFromApi()
         leaguesViewModel?.bindResultToViewController = { [weak self] in
             DispatchQueue.main.async {
                 self?.indicator?.stopAnimating()
                 self?.result = self?.leaguesViewModel?.getLeagues()
-                self?.favouriteLeaguesKeys = self?.leaguesViewModel?.getKeysOfFavouriteLeagues(sport: (self?.sport)!)
-                print(self?.favouriteLeaguesKeys)
+                self?.reloadArray()
                 self?.tableView.reloadData()
             }
         }
-
-        navItem.title = pageTitle ?? "testSport"
         tableView.register(UINib(nibName: "LeagueTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
 
     }
-
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -92,8 +89,16 @@ class LeaguesTableViewController: UITableViewController {
         leagueDetails.pageTitle = result?[indexPath.row].league_name
         leagueDetails.league = result?[indexPath.row]
         leagueDetails.leagueKey = result?[indexPath.row].league_key
+        leagueDetails.leaguesScreenDelegate = self
         
         present(leagueDetails, animated: true)
+    }
+    
+    func reloadArray() {
+        leaguesViewModel?.loadDatafromCoreData()
+        favouriteLeaguesKeys = leaguesViewModel?.getKeysOfFavouriteLeagues(sport: (sport))
+        print(favouriteLeaguesKeys)
+
     }
 
 }

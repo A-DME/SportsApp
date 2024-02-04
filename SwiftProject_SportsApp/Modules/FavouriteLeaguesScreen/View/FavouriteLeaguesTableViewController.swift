@@ -32,11 +32,11 @@ class FavouriteLeaguesTableViewController: UITableViewController {
         self.tableView.register(UINib(nibName: "LeagueTableViewCell", bundle: nil), forCellReuseIdentifier: "fcell")
     }
    
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         favouritesViewModel?.loadData()
         favouritesViewModel?.bindResultToViewController = { [weak self] in
+            self?.favouriteLeagues = self?.favouritesViewModel?.getFavouriteLeagues()
             DispatchQueue.main.async {
-                self?.favouriteLeagues = self?.favouritesViewModel?.getFavouriteLeagues()
                 self?.indicator?.stopAnimating()
                 self?.tableView.reloadData()
             }

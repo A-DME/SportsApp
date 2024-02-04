@@ -56,9 +56,10 @@ class SportsViewController: UIViewController, UICollectionViewDelegate, UICollec
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let leagues = self.storyboard?.instantiateViewController(withIdentifier: "leagues") as! LeaguesTableViewController
         // TODO: -Put here the sport name.. also send the endpoint of the sport
-        leagues.pageTitle = sports[indexPath.row].capitalized + " Leagues"
+        leagues.title = sports[indexPath.row].capitalized + " Leagues"
         leagues.sport = sports[indexPath.row]
-        present(leagues, animated: true)
+//        present(leagues, animated: true)
+        self.navigationController?.pushViewController(leagues, animated: true)
         
     }
     

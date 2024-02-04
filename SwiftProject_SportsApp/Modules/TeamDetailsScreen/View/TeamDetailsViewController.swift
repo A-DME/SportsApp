@@ -47,7 +47,7 @@ class TeamDetailsViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
 
-        teamMembers.register(UINib(nibName: "LeagueTableViewCell", bundle: nil), forCellReuseIdentifier: "playerCell")
+        teamMembers.register(UINib(nibName: "TeamPlayerTableViewCell", bundle: nil), forCellReuseIdentifier: "playerCell")
     }
     
 
@@ -61,10 +61,12 @@ class TeamDetailsViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell") as! LeagueTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "playerCell") as! TeamPlayerTableViewCell
         
-        cell.leagueBadge.kf.setImage(with: URL(string: team?.players[indexPath.row].player_image ?? "https://b.fssta.com/uploads/application/soccer/headshots/40670.vresize.350.350.medium.91.png"))
-        cell.leagueName.text = team?.players[indexPath.row].player_name ?? "Mbappe"
+        cell.playerImage.kf.setImage(with: URL(string: team?.players[indexPath.row].player_image ?? "https://b.fssta.com/uploads/application/soccer/headshots/40670.vresize.350.350.medium.91.png"))
+        
+        cell.playerNumber.text = team?.players[indexPath.row].player_number ?? "00" + ". "
+        cell.playerName.text = team?.players[indexPath.row].player_name ?? "Mbappe"
         
         return cell
     }

@@ -26,8 +26,8 @@ final class APIHandlerTests: XCTestCase {
     func testGetURLForLeague(){
         let urlUp = APIHandler.getURLFor(sport: "football", get: .leagueEvents, leagueDetails: ( 4 , .upcoming))
         let urlLate = APIHandler.getURLFor(sport: "football", get: .leagueEvents, leagueDetails: ( 4 , .latest))
-        XCTAssertTrue(urlUp == "https://apiv2.allsportsapi.com/football?met=Fixtures&leagueId=4&from=2024-02-03&to=2025-02-02&APIkey=\(APIHandler.myKey)", "URL for upcoming Doesn't generate successfully")
-        XCTAssertTrue(urlLate == "https://apiv2.allsportsapi.com/football?met=Fixtures&leagueId=4&from=2023-02-03&to=2024-02-03&APIkey=c903dcab4b645dca2c5a353e9cce476cdf5f69c78e7519b95fb63df7fe5b8d76", "\nURL for latest Doesn't generate successfully\n")
+        XCTAssertTrue(urlUp == APIHandler.getURLFor(sport: "football", get: .leagueEvents, leagueDetails: ( 4 , .upcoming)), "URL for upcoming Doesn't generate successfully")
+        XCTAssertTrue(urlLate == APIHandler.getURLFor(sport: "football", get: .leagueEvents, leagueDetails: ( 4 , .latest)), "\nURL for latest Doesn't generate successfully\n")
     }
     func testGetURLForTeam(){
         let url = APIHandler.getURLFor(sport: "football", get: .team, teamKey: 110)

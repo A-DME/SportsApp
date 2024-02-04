@@ -21,6 +21,7 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     var leagueKey: Int?
     var pageTitle: String?
     var leagueDetailsViewModel: LeagueDetailsViewModel?
+    var leaguesScreenDelegate: ReloadFavouriteLeaguesArray?
     
     var upcomingEvents: [Event]?
     var latestEvents: [Event]?
@@ -213,6 +214,8 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
     
     @IBAction func backButton(_ sender: Any) {
         self.dismiss(animated: true)
+        guard let delegate = leaguesScreenDelegate else { return }
+        delegate.reloadArray()
     }
     
     

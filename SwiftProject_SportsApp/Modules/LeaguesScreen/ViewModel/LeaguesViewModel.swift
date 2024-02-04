@@ -24,12 +24,14 @@ class LeaguesViewModel{
         coreDataManager = CoreDataManager()
     }
     
-    func loadData(){
+    func loadDataFromApi(){
         networkHandler?.fetch(url: APIHandler.getURLFor(sport: sport, get: .allLeagues), type: Leagues.self, complitionHandler: { leagues in
             self.result = leagues?.result
         })
+    }
+    
+    func loadDatafromCoreData(){
         coreDataManager?.fetchFromCoreData()
-        
     }
     
     func getLeagues()->[League]{
