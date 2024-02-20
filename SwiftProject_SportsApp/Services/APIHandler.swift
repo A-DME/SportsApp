@@ -13,7 +13,6 @@ class APIHandler{
     
     var sport: String?
     
-    
     enum Dates {
         case currentYear, lastYear, nextYear
     }
@@ -52,7 +51,7 @@ class APIHandler{
     class func getURLFor(sport: String, get detail: Detail, leagueDetails: (leagueKey: Int, upcomingOrLatest: EventsSelector) = (0, .upcoming), teamKey: Int = 0) -> String {
         var result: String = baseURL + sport + detail.rawValue
         if leagueDetails.leagueKey == 0 && teamKey == 0{
-            // TODO: Fix here api is duplicated
+            // TODO: Fix here api is duplicated -- Done
             result += Extras.key.rawValue + myKey
             
         } else if leagueDetails.leagueKey != 0 {
