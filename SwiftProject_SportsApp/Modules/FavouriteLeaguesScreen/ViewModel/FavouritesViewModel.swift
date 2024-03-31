@@ -30,6 +30,11 @@ class FavouritesViewModel {
         return league
     }
     
+    func removeFavourite(leagueKey: Int, sport: String){
+        coreDataManager?.deleteFromCoreData(leagueKey: leagueKey, sport: sport)
+        
+    }
+    
     func getFavouriteLeagues() -> [NSManagedObject]{
         return result ?? []
     }

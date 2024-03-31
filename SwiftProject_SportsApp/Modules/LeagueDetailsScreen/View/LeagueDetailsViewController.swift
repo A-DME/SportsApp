@@ -210,23 +210,29 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         }
     }
     
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//
-//        if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as? SectionHeaderView {
-//            switch indexPath.section {
-//            case 0:
-//                sectionHeader.headerLabel.text = "Upcoming Matches"
-//            case 1:
-//                sectionHeader.headerLabel.text = "Latest Matches"
-//            case 2:
-//                sectionHeader.headerLabel.text = "Clubs"
-//            default:
-//                sectionHeader.headerLabel.text = "Section Header"
-//            }
-//            return sectionHeader
-//        }
-//        return SectionHeaderView()
-//    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as? SectionHeaderView {
+                print("tooty toot")
+                switch indexPath.section {
+                case 0:
+                    sectionHeader.headerLabel.text = "Upcoming Matches"
+                case 1:
+                    sectionHeader.headerLabel.text = "Latest Matches"
+                case 2:
+                    sectionHeader.headerLabel.text = "Clubs"
+                default:
+                    sectionHeader.headerLabel.text = "Section Header"
+                }
+                return sectionHeader
+            }
+        default:
+            return UICollectionReusableView()
+        }
+        return UICollectionReusableView()
+    }
     
     
     

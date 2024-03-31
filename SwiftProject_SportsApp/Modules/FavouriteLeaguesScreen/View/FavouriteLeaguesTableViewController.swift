@@ -91,6 +91,21 @@ class FavouriteLeaguesTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let alert = UIAlertController(title: "Confirmation", message: "Are you sure you want to un-favourite this league?", preferredStyle: .alert)
+            let yes = UIAlertAction(title: "Yes", style: .destructive) { UIAlertAction in
+                self.favouritesViewModel?.removeFavourite(leagueKey: self.favouriteLeagues?[indexPath.row].value(forKey: "league_key") as! Int, sport: self.favouriteLeagues?[indexPath.row].value(forKey: "sport") as! String)
+                self.viewDidAppear(true)
+            }
+            let no = UIAlertAction(title: "No", style: .cancel)
+            
+            alert.addAction(yes)
+            alert.addAction(no)
+            present(alert, animated: true)
+        }
+    }
+    
 
 }
 
