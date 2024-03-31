@@ -9,7 +9,7 @@ import Foundation
 
 class APIHandler{
     static let baseURL = "https://apiv2.allsportsapi.com/"
-    static let myKey = "c903dcab4b645dca2c5a353e9cce476cdf5f69c78e7519b95fb63df7fe5b8d76"
+    static let myKey = "e5ed234862aba257b4b879c5698013303d44eebda55ba5688289a4b7c09f8555"
     
     var sport: String?
     

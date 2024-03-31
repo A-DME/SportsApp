@@ -152,10 +152,10 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
         
         var result: Int?
         switch section{
-            case 0:
+        case 0:
             result = upcomingEvents?.count
         case 1:
-            result = latestEvents?.count
+            result = latestEvents?.count ?? 0 > 20 ? 20 : latestEvents?.count
         case 2:
             result = teams?.count
         default:
@@ -209,6 +209,25 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
             present(teamScreen, animated: true)
         }
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//
+//        if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "SectionHeader", for: indexPath) as? SectionHeaderView {
+//            switch indexPath.section {
+//            case 0:
+//                sectionHeader.headerLabel.text = "Upcoming Matches"
+//            case 1:
+//                sectionHeader.headerLabel.text = "Latest Matches"
+//            case 2:
+//                sectionHeader.headerLabel.text = "Clubs"
+//            default:
+//                sectionHeader.headerLabel.text = "Section Header"
+//            }
+//            return sectionHeader
+//        }
+//        return SectionHeaderView()
+//    }
+    
     
     
     @IBAction func backButton(_ sender: Any) {
