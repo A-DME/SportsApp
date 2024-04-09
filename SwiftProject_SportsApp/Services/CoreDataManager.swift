@@ -12,6 +12,8 @@ import UIKit
 class CoreDataManager{
     var context : NSManagedObjectContext!
     var storedData: [NSManagedObject]?
+    var dummyLeagueLogo = "https://rovenlogos.com/wp-content/uploads/2021/12/rovenlogos_footballleague_light.png"
+
     init() {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         context = delegate.persistentContainer.viewContext
@@ -38,7 +40,9 @@ class CoreDataManager{
         
         let league = NSManagedObject(entity: leaguesEntity!, insertInto: context)
         league.setValue(favLeague.league_key ?? 0, forKey: "league_key")
-        league.setValue(favLeague.league_logo ?? "", forKey: "league_logo")
+        if let league_logo = favLeague.league_logo {
+            league.setValue(league_logo.last == "/" ? dummyLeagueLogo : league_logo, forKey: "league_logo")
+        }
         league.setValue(favLeague.league_name ?? "", forKey: "league_name")
         league.setValue(sport , forKey: "sport")
         do{
