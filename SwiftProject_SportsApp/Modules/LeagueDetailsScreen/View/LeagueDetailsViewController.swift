@@ -170,22 +170,26 @@ class LeagueDetailsViewController: UIViewController, UICollectionViewDelegate, U
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upCell", for: indexPath) as! LeagueUpcomingEventCollectionViewCell
             cell.homeTeamLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].home_team_logo ?? dummyTeamLogo))
             cell.awayTeamLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].away_team_logo ??  dummyTeamLogo))
-            cell.leagueLogo.kf.setImage(with: URL(string: upcomingEvents![indexPath.row].league_logo ??  dummyLeagueLogo))
             cell.eventTime.text = "\(upcomingEvents![indexPath.row].event_date ?? "eventDate" )\n\(upcomingEvents![indexPath.row].event_time ?? "eventTime")"
             cell.homeTeamTitle.text = upcomingEvents![indexPath.row].event_home_team
             cell.awayTeamTitle.text = upcomingEvents![indexPath.row].event_away_team
-            
+            guard let leagueLogo = upcomingEvents?[indexPath.row].league_logo else {
+                cell.leagueLogo.kf.setImage(with: URL(string: dummyLeagueLogo))
+                return cell }
+            cell.leagueLogo.kf.setImage(with: URL(string: leagueLogo.last == "/" ? dummyLeagueLogo : leagueLogo))
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "lateCell", for: indexPath) as! LeagueLatestEventCollectionViewCell
             cell.homeTeamLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].home_team_logo ??  dummyTeamLogo))
             cell.awayTeamLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].away_team_logo ?? dummyTeamLogo))
-            cell.leagueLogo.kf.setImage(with: URL(string: latestEvents![indexPath.row].league_logo ?? dummyLeagueLogo))
             cell.eventTime.text = "\(latestEvents![indexPath.row].event_date ?? "eventDate" )\n\(latestEvents![indexPath.row].event_time ?? "eventTime")"
             cell.matchResult.text = latestEvents![indexPath.row].event_final_result
             cell.homeTeamTitle.text = latestEvents![indexPath.row].event_home_team
             cell.awayTeamTitle.text = latestEvents![indexPath.row].event_away_team
-            
+            guard let leagueLogo = latestEvents?[indexPath.row].league_logo else {
+                cell.leagueLogo.kf.setImage(with: URL(string: dummyLeagueLogo))
+                return cell }
+            cell.leagueLogo.kf.setImage(with: URL(string: leagueLogo.last == "/" ? dummyLeagueLogo : leagueLogo))
             return cell
         case 2:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! LeagueTeamCollectionViewCell

@@ -71,9 +71,12 @@ class LeaguesTableViewController: UITableViewController, ReloadFavouriteLeaguesA
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeagueTableViewCell
         
-        cell.leagueBadge.kf.setImage(with: URL(string: result?[indexPath.row].league_logo ?? dummyLeagueLogo))
         cell.leagueName.text = result?[indexPath.row].league_name ?? "League Name \(indexPath.row + 1)"
 
+        guard let leagueLogo = result?[indexPath.row].league_logo else {
+            cell.leagueBadge.kf.setImage(with: URL(string: dummyLeagueLogo))
+            return cell }
+        cell.leagueBadge.kf.setImage(with: URL(string: leagueLogo.last == "/" ? dummyLeagueLogo : leagueLogo))
         return cell
     }
     
